@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+            <div class="header">
+                <div class="left-header">
+                    <a href="index.html"><img src="img/logo.png" class="logo-image"></a>
+                    <a href="index.html">Kanvas</a>
+                </div>
+                <div class="right-header">
+                    <input type="checkbox" id="burger">
+                    <ul class="burger-menu">
+                        <li>
+                            <a href="index.html">Галерея</a>
+                        </li>
+                        <li>
+                            <a class="about" href="index.html">Про нас</a>
+                        </li>
+                        <li>
+                            <button class="buy-btn">
+                                Замовити Дзвінок
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </header>
+        <main>
+            <div class="main">
+                <div class="left-main">
+                    <img id="easel" src="img/мольберт.png" alt="Easel">
+                    <img id="leaf" src="img/leaf.png" alt="Leaf">
+                </div>
+                <div class="right-main">
+                    <div class="main-text">
+                        <div class="top-main-text">
+                            <h1>Виберіть розмір</h1>
+                            <div class="buttons">
+                                <label class="size-btn">
+                                    <input type="radio" name="size" value="30x30" id="size30x30"> 30x30
+                                </label>
+                                <label class="size-btn">
+                                    <input type="radio" name="size" value="30x90" id="size30x90"> 30x90
+                                </label>
+                                <label class="size-btn">
+                                    <input type="radio" name="size" value="90x120" id="size90x120"> 90x120
+                                </label>
+                                <label class="size-btn">
+                                    <input type="radio" name="size" value="90x150" id="size90x150"> 90x150
+                                </label>
+                                <button class="calc-btn" onclick="updatePrice()">Задати Розмір</button>
+                            </div>
+                            <div class="custom-size">
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <input type="text" id="width">
+                                            <label for="width">ширина</label>
+                                        </td>
+                                        <td class="padding">
+                                            <span>x</span>
+                                        </td>
+                                        <td>
+                                            <input type="text" id="height">
+                                            <label for="height">висота</label>
+                                        </td>
+                                        <td class="padding-left">
+                                            <button class="calc-btn" onclick="calculateSize()">ПІДРАХУВАТИ</button>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div id="error-message" style="color: red; margin-bottom: 30px;"></div>
+                        </div>
+                        <hr>
+                        <div class="center-main-text">
+                            <div class="center-main-text_left">
+                                <h2>Додаткові опції</h2>
+                                <div class="option">
+                                    <label>
+                                        <input type="checkbox" id="option1" onclick="updatePrice()">
+                                        дорожче полотно
+                                    </label>
+                                    <span class="price">+35 грн</span>
+                                </div>
+                                <div class="option">
+                                    <label>
+                                        <input type="checkbox" id="option2" onclick="updatePrice()">
+                                        з рамкою
+                                    </label>
+                                    <span class="price">+10 грн</span>
+                                </div>
+                                <div class="option">
+                                    <label class="max-price">
+                                        <input type="checkbox" id="option3" onclick="updatePrice()">
+                                        з доставкою (Нова Пошта)
+                                    </label>
+                                    <span class="price">+40 грн</span>
+                                </div>
+                            </div>
+                            <hr>
+
+                            <div class="container">
+                                <div class="button-and-total">
+                                    <button class="purchase-btn">
+                                        Придбати
+                                    </button>
+                                    <div class="total-container">
+                                        <span class="total-sum">ЗАГАЛЬНА СУМА:</span>
+                                        <span id="total" class="total-amount">345</span>
+                                        <span class="total-grn"> грн</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <div class="copy">
+                <p class="copyright">© Kanvas. Всі права захищені</p>
+            </div>
+        </footer>
+    </div>
+    <div id="contactModal" class="modal">
+        <div class="modal-content">
+            <h2>Замовити дзвінок</h2>
+            <form action="index.php" method="POST">
+                <input type="hidden" name="action" value="callback">
+                <label>
+                    <input type="text" name="phoneNumber" placeholder="Номер телефону" required>
+                </label>
+                <label>
+                    <button type="submit">Відправити</button>
+                </label>
+            </form>
+        </div>
+
+        <!-- Модальное окно для регистрации -->
+        <div id="contactModal2" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Реєстрація</h2>
+                <form action="index.php" method="POST">
+                    <input type="hidden" name="action" value="registration">
+                    <label>
+                        <input type="text" name="userName" placeholder="Ваше ім'я" required>
+                    </label>
+                    <label>
+                        <input type="text" name="phoneNumber" placeholder="Номер телефону" required>
+                    </label>
+                    <label>
+                        <input type="text" name="userEmail" placeholder="Email" required>
+                    </label>
+                    <label>
+                        <button type="submit">Відправити</button>
+                    </label>
+                </form>
+            </div>
+        </div>
+        <script src="js/index.js"></script>
+</body>
+
+</html>
